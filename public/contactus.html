@@ -1,0 +1,175 @@
+<!-- Name: Course Project - CoWorking Registry Web App
+Course Code: SODV1201
+Class: Software Development Diploma program.
+Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="script.js" defer></script>
+    <title>SPACESHARE - Your workplace anytime, anywhere</title>
+  </head>
+  <body>
+    <!--Quick Links-->
+    <div class="quicklinks">
+      <div>
+        <ul class="qlinkitems">
+          <li>
+            <i
+              class="fa fa-envelope"
+              style="font-size: 20px; color: #c7c7c7"
+            ></i
+            >&nbsp;<a
+              href="mailto:info@spaceshare.com"
+              title="E-mail Us"
+              style="color: #c7c7c7"
+              >info@spaceshare.com</a
+            >
+          </li>
+          <li>
+            <i class="fa fa-phone" style="font-size: 20px; color: #c7c7c7"></i
+            >&nbsp;<a
+              href="tel:+18255587624"
+              title="Call Us"
+              style="color: #c7c7c7"
+              >825.558.7624</a
+            >
+          </li>
+          <li>
+            <i
+              class="fa fa-calendar"
+              style="font-size: 20px; color: #c7c7c7"
+            ></i
+            >&nbsp;Mon - Sun 6:00am - 12:00mn
+          </li>
+        </ul>
+      </div>
+      <div>&nbsp;</div>
+      <div class="qlinkitems">
+        <li>
+          <a href="#" title="facebook"
+            ><i class="fa fa-facebook" style="font-size: 20px"></i
+          ></a>
+        </li>
+        <li>
+          <a href="#" title="linkedin"
+            ><i class="fa fa-linkedin" style="font-size: 20px"></i
+          ></a>
+        </li>
+        <li>
+          <a href="#" title="twitter"
+            ><i class="fa fa-twitter" style="font-size: 20px"></i
+          ></a>
+        </li>
+      </div>
+    </div>
+    <!--Header-->
+    <header>
+      <div class="logo">
+        <h1 id="h1custom">SPACESHARE</h1>
+      </div>
+      <div>&nbsp;</div>
+      <input id="menu-toggle" type="checkbox" />
+      <label class="menu-button-container" for="menu-toggle">
+        <div class="menu-button"></div>
+      </label>
+      <ul class="menu">
+        <li><a href="index.html" title="Back to Home">HOME</a></li>
+        <li><a href="#" title="About Us">ABOUT US</a></li>
+        <li>
+          <a href="#" title="List Space">LIST SPACE</a>
+        </li>
+        <li><a href="contactus.html" title="Contact Us">CONTACT US</a></li>
+        <li>
+          <button class="button button1">
+            <a href="login.html" title="Login" style="color: #cecece">LOGIN</a>
+          </button>
+        </li>
+      </ul>
+    </header>
+
+    <!--Banner Slideshow-->
+    <div class="slideshow-container">
+      <div class="mySlides">
+        <img src="images/banner1.png" style="width: 100%" />
+      </div>
+
+      <div class="mySlides">
+        <img src="images/banner2.png" style="width: 100%" />
+      </div>
+
+      <div class="mySlides">
+        <img src="images/banner3.png" style="width: 100%" />
+      </div>
+
+      <div class="mySlides">
+        <img src="images/banner4.png" style="width: 100%" />
+      </div>
+    <br />
+
+    <div style="text-align: center">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <!--Main Content-->
+    <main>
+      <article>
+        <h2 id="h3custom">CONTACT US</h2>
+        <hr />
+        <p class="pmedium">
+          Our Main Office is located at the heart of Calgary City downtown, but our workplaces are located anywhere in the City of Calgary. 
+        </p>
+        <p class="pmedium">
+          Contact us and we are more than happy to assist you in finding the workplace that best suits your needs.
+        </p>
+        <p class="pmedium" style="font-weight: bolder">
+          Search and Book your workplace now...
+        </p>
+      </article>
+      <article>
+        <h2 id="h3custom">OFFICE ADDRESS</h2>
+        <hr />
+        <p class="pmedium">
+          <i
+            class="fa fa-map-marker"
+            style="font-size: 20px; color: #213159"
+          ></i
+          >&emsp;345 6 Avenue SE, Calgary, AB<br /><br />
+          <i class="fa fa-envelope" style="font-size: 20px; color: #213159"></i
+          >&nbsp;
+          <a href="mailto:info@greenthumblanscaping.com" title="E-mail Us"
+            >info@spaceshare.com</a
+          ><br /><br />
+          <i class="fa fa-phone" style="font-size: 20px; color: #213159"></i
+          >&emsp;<a href="tel:+18255587624" title="Call Us">825.558.7624</a
+          ><br /><br />
+        </p>
+      </article>
+    </main>
+    <main>
+      <article>
+        <h2 id="h3custom">OUR LOCATION MAP</h2>
+        <hr />
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2508.3315354053475!2d-114.05918332396864!3d51.04696584423572!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53716fffc07fb53d%3A0x5c4e6ee33c47d44e!2s345%206%20Ave%20SE%2C%20Calgary%2C%20AB%20T2G%204V1!5e0!3m2!1sen!2sca!4v1691260454408!5m2!1sen!2sca" width=100% height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <hr />
+      </article>
+    </main>
+
+    <!--Footer-->
+    <footer>
+      <p class="pfooter">
+        © 2023 All Rights Reserved. SpaceShare
+      </p>
+    </footer>
+  </body>
+</html>
