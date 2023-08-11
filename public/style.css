@@ -276,7 +276,8 @@ th {
 
 td {
   background-color: #ececec;
-  padding: 5px;
+  padding: 10px 0px 10px 0px;
+  border-radius: 5px;
 }
 
 #total {
@@ -345,6 +346,10 @@ footer {
   #h3custom {
     font-size: medium;
     padding-left: 0px;
+  }
+
+  label {
+    color: #213159;
   }
 
   .pmedium {

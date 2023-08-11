@@ -48,6 +48,32 @@ app.post("/register", (req, res) => {
   );
 });
 
+//Routing and URL Forwarding
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+
+  const user = users.find(
+    (u) => u.username === username && u.password === password
+  );
+
+  if (user) {
+    if (user.status === "owner") {
+      res.redirect("/owneradmin.html");
+    } else if (user.status === "coworker") {
+      res.redirect("/coworker.html");
+    } else {
+      // Handle other roles or scenarios if needed
+      res.redirect("/");
+    }
+  } else {
+    // Display error message
+    res.sendFile(__dirname + "/public/login.html", {
+      error: "Invalid credentials. Please try again.",
+    });
+  }
+});
+
+//Check acitivated server port
 app.listen(8081, () => {
   console.log("APP LISTENING ON PORT 8081.");
 });

@@ -82,9 +82,9 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
       </label>
       <ul class="menu">
         <li><a href="index.html" title="Back to Home">HOME</a></li>
-        <li><a href="#" title="About Us">ABOUT US</a></li>
+        <li><a href="aboutus.html" title="About Us">ABOUT US</a></li>
         <li>
-          <a href="#" title="List Space">LIST SPACE</a>
+          <a href="login.html" title="List Space">LIST SPACE</a>
         </li>
         <li><a href="contactus.html" title="Contact Us">CONTACT US</a></li>
         <li>
@@ -122,149 +122,52 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
     </div>
 
     <!--Main Content-->
-    <main>
-      <article>
-        <h2 id="h3custom">LOGIN</h2>
-        <hr />
-        <p style="text-align: left;">Sign in your username and password below to book or post your workplace.</pstyle=>
-<form action="#" method="post">
+  <main>
+  <article>
+    <img class="imgcustom" src="images/login.png" alt="login">
+  </article>
+  <article>
+    <h2 id="h3custom">LOGIN</h2>
+        <p style="text-align: left;">Login to list space or book your workplace</p>
+    <hr />
+    <br>
+    <form id="loginForm" action="/login" method="post">
       <table align="center">
         <tr>
           <td>
-            <label for="username">Username</label>
+            <label for="username" style="color:#213159">Username</label>
           </td>
           <td>
-            <input
-              type="text"
-              name="username"
-              placeholder="Enter Username"
-              required
-            />
+            <input type="text" name="username" placeholder="Enter Username" required />
           </td>
         </tr>
         <tr>
           <td>
-            <label for="password">Password</label>
+            <label for="password" style="color:#213159">Password</label>
           </td>
           <td>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter Password"
-              required
-            />
+            <input type="password" name="password" placeholder="Enter Password" required />
           </td>
         </tr>
       </table>
-            <input class="button button1" style="color: #cecece" type="submit" value="LOGIN" />
-            
+      <input class="button button1" style="color: #cecece" type="submit" value="LOGIN" />
     </form>
-      </article>
-      </article>
-      <article>
-        <h2 id="h3custom">REGISTER</h2>
-        <hr />
-        <p style="text-align: left;">Register below if you do not have an account with us yet.</p>
-<form action="/register" method="post">
-      <table align="center">
-        <tr>
-          <td><label for="uid">ID Number</label></td>
-          <td>
-            <input
-              type="number"
-              name="id"
-              placeholder="Enter ID Number"
-              required
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="firstname">First Name</label>
-          </td>
-          <td>
-            <input
-              type="text"
-              name="firstname"
-              placeholder="Enter First Name"
-              required
-            />
-          </td>
-        </tr>
-        <tr>
-          <td><label for="lastname">Last Name</label></td>
-          <td>
-            <input
-              type="text"
-              name="lastname"
-              placeholder="Enter Last Name"
-              required
-            />
-          </td>
-        </tr>
-                <tr>
-          <td>
-            <label for="username">Username</label>
-          </td>
-          <td>
-            <input
-              type="text"
-              name="username"
-              placeholder="Enter Username"
-              required
-            />
-          </td>
-        </tr>
-                <tr>
-          <td>
-            <label for="password">Password</label>
-          </td>
-          <td>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter Password"
-              required
-            />
-          </td>
-        </tr>
-                <tr>
-          <td><label for="phone">Phone No.</label></td>
-          <td>
-            <input
-              type="number"
-              name="phone"
-              placeholder="Enter Phone Number"
-              required
-            />
-          </td>
-        </tr>
-        <tr>
-          <td><label for="email">E-Mail</label></td>
-          <td>
-            <input
-              type="text"
-              name="email"
-              placeholder="Enter E-mail Address"
-              required
-            />
-          </td>
-        </tr>
-        <tr>
-          <td><label for="role">Register As</label></td>
-          <td>
-            <select name="status" id="status" required>
-              <option value="">Select Role</option>
-              <option value="owner">Owner</option>
-              <option value="coworker">CoWorker</option>
-            </select>
-          </td>
-        </tr>
-      </table>
-            <input class="button button1" style="color: #cecece" type="submit" value="REGISTER" />
-    </form>
-      </article>
-    </main>
+
+      <script>
+        // Check if there is an error message in the query string
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorMessage = urlParams.get('error');
+        
+        if (errorMessage) {
+          // Display the error message in the designated placeholder
+          document.getElementById('errorMessage').textContent = errorMessage;
+        }
+      </script>
+          <p id="errorMessage" style="color: red;"></p>
+    <hr>
+        <p style="text-align: left; font-size: medium;">Doesn't have an account yet? <a href="signup.html">Sign Up</a></p>
+  </article>
+  </main>
 
     <!--Footer-->
     <footer>

@@ -122,31 +122,122 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
     </div>
 
     <!--Main Content-->
-    <main>
-      <article>
-        <h2 id="h2custom">CoWorking Spaces in Calgary</h2>
-        <p>Try Our Flexible Office Space Anywhere in the City</p>
+  <main>
+    <article>
+        <img class="imgcustom3" src="images/signup.png" alt="signup">
+    </article>
+    <article>
+        <h2 id="h3custom">REGISTER</h2>
+        <p style="text-align: left;">Register below if you do not have an account with us yet.</p>
         <hr />
-      </article>
-    </main>
-    <main>
-      <article>
-        <img class="imgcustom" src="images/office1.png" alt="Personal Desk" />
-        <h2 id="h2custom">Personal Desk</h2>
-      </article>
-      <article>
-        <img class="imgcustom" src="images/office2.png" alt="Meeting Room" />
-        <h2 id="h2custom">Meeting Room</h2>
-      </article>
-      <article>
-        <img class="imgcustom" src="images/office3.png" alt="Private Room" />
-        <h2 id="h2custom">Private Room</h2>
-      </article>
-    </main>
+      <form action="/register" method="post">
+      <table align="center">
+        <tr>
+          <td><label for="uid">ID Number</label></td>
+          <td>
+            <input
+              type="number"
+              name="id"
+              placeholder="Enter ID Number"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="firstname">First Name</label>
+          </td>
+          <td>
+            <input
+              type="text"
+              name="firstname"
+              placeholder="Enter First Name"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="lastname">Last Name</label></td>
+          <td>
+            <input
+              type="text"
+              name="lastname"
+              placeholder="Enter Last Name"
+              required
+            />
+          </td>
+        </tr>
+                <tr>
+          <td>
+            <label for="username">Username</label>
+          </td>
+          <td>
+            <input
+              type="text"
+              name="username"
+              placeholder="Enter Username"
+              required
+            />
+          </td>
+        </tr>
+                <tr>
+          <td>
+            <label for="password">Password</label>
+          </td>
+          <td>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter Password"
+              required
+            />
+          </td>
+        </tr>
+                <tr>
+          <td><label for="phone">Phone No.</label></td>
+          <td>
+            <input
+              type="number"
+              name="phone"
+              placeholder="Enter Phone Number"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="email">E-Mail</label></td>
+          <td>
+            <input
+              type="text"
+              name="email"
+              placeholder="Enter E-mail Address"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="role">Register As</label></td>
+          <td>
+            <select name="status" id="status" required>
+              <option value="">Select Role</option>
+              <option value="owner">Owner</option>
+              <option value="coworker">CoWorker</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+            <input class="button button1" style="color: #cecece" type="submit" value="REGISTER" />
+    </form>
+    <hr>
+            <p style="text-align: left; font-size: medium;"><a href="login.html">Login</a>&nbsp;if you already have an account.</p>
+    </article>
+  </main>
 
     <!--Footer-->
     <footer>
-      <p class="pfooter">© 2023 All Rights Reserved. SpaceShare.</p>
+      <p class="pfooter">
+        © 2023 All Rights Reserved. SpaceShare
+      </p>
     </footer>
   </body>
 </html>
