@@ -83,6 +83,13 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
         <div class="menu-button"></div>
       </label>
       <ul class="menu">
+        <li>
+          <a href="owneradmin.html#listproperty" title="List Space">LIST</a>
+        </li>
+        <li>
+          <a href="ownerview.html#viewproperty" title="View Space">VIEW</a>
+        </li>
+        <li>
           <button class="button button1">
             <a href="index.html" title="Logout" style="color: #cecece">LOGOUT</a>
           </button>
@@ -118,10 +125,93 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
 
     <!--Main Content-->
     <main>
-      <article>
+      <article id="listproperty">
         <h2 id="h3custom">LIST PROPERTY</h2>
         <p style="text-align: left;">Fill up the form below to list your Property</p>
         <hr />
+
+        <form id="addPropertyForm" action="/addProperty" method="post">
+          <table align="center" style="width: 60%;">
+
+            <tr>
+              <td>
+                <label for="propertyid" style="color:#213159">Property ID</label>
+              </td>
+              <td>
+                <input type="number" name="propertyid" placeholder="Enter Property ID" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="propertyaddress" style="color:#213159">Address</label>
+              </td>
+              <td>
+                <input type="text" name="propertyaddress" placeholder="Enter Address" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="propertyneighborhood" style="color:#213159">Neighborhood</label>
+              </td>
+              <td>
+                <input type="text" name="propertyneighborhood" placeholder="Enter Neighborhood" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="propertysize" style="color:#213159">Size (sqft)</label>
+              </td>
+              <td>
+                <input type="number" name="propertysize" placeholder="Enter Size (sqft)" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="propertyparking" style="color:#213159">Parking</label>
+              </td>
+              <td>
+                <input type="radio" name="propertyparking" value="Yes"  required />
+                <label for="propertyparking">Yes</label>
+                <input type="radio" name="propertyparking" value="No"  required />
+                <label for="propertyparking">No</label>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="propertypubtranspo" style="color:#213159">Public Transportation</label>
+              </td>
+              <td>
+                <input type="checkbox" name="propertypubtranspo" value="Bus" />
+                <label for="propertypubtranspo">Bus</label>
+                <input type="checkbox" name="propertypubtranspo" value="Train" />
+                <label for="propertypubtranspo">Train</label>
+                <input type="checkbox" name="propertypubtranspo" value="Subway" />
+                <label for="propertypubtranspo">Subway</label>
+                <input type="hidden" name="propertypubtranspo" value="None" default />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="propertystatus" style="color:#213159">Property Status</label>
+              </td>
+              <td>
+                <input type="radio" name="propertystatus" value="Available"  required />
+                <label for="propertystatus">Available</label>
+                <input type="radio" name="propertystatus" value="Unavailable"  required />
+                <label for="propertystatus">Unavailable</label>
+              </td>
+            </tr>
+
+          </table>
+          <input class="button button1" style="color: #cecece" type="submit" value="ADD PROPERTY" />
+        </form>
+
       </article>
     </main>
     <main>
@@ -129,6 +219,128 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
         <h2 id="h3custom">LIST WORKSPACE</h2>
         <p style="text-align: left;">Fill up the form below to list your Workspace</p>
         <hr />
+
+        <form id="addWorkSpaceForm" action="/addWorkSpace" method="post">
+          <table align="center" style="width: 60%;">
+
+            <tr>
+              <td>
+                <label for="workspaceid" style="color:#213159">Workspace ID</label>
+              </td>
+              <td>
+                <input type="number" name="workspaceid" placeholder="Enter Workspace ID" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="propertyid" style="color:#213159">Property ID</label>
+              </td>
+              <td>
+                <input type="number" name="propertyid" placeholder="Enter Property ID" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="workspacetype" style="color:#213159">Type</label>
+              </td>
+              <td>
+                <input type="radio" name="workspacetype" value="Personal Desk"  required />
+                <label for="workspacetype">Personal Desk</label>
+                <input type="radio" name="workspacetype" value="Meeting Room"  required />
+                <label for="workspacetype">Meeting Room</label>
+                <input type="radio" name="workspacetype" value="Private Room"  required />
+                <label for="workspacetype">Private Room</label>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="workspaceaddress" style="color:#213159">Address</label>
+              </td>
+              <td>
+                <input type="text" name="workspaceaddress" placeholder="Enter Workspace Address" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="workspaceneighborhood" style="color:#213159">Neighborhood</label>
+              </td>
+              <td>
+                <input type="text" name="workspaceneighborhood" placeholder="Enter Neighborhood" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="seatingcapacity" style="color:#213159">Seating Capacity</label>
+              </td>
+              <td>
+                <input type="number" name="seatingcapacity" placeholder="Enter Seating Capacity" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="workspacesmoking" style="color:#213159">Smoking</label>
+              </td>
+              <td>
+                <input type="radio" name="workspacesmoking" value="Allowed"  required />
+                <label for="workspacesmoking">Allowed</label>
+                <input type="radio" name="workspacesmoking" value="Not Allowed"  required />
+                <label for="workspacesmoking">Not Allowed</label>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="workspacedateavailable" style="color:#213159">Date Available</label>
+              </td>
+              <td>
+                <input type="date" name="workspacedateavailable" multiple required/>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="workspacedailyprice" style="color:#213159">Daily Price</label>
+              </td>
+              <td>
+                <input type="number" name="workspacedailyprice" placeholder="Enter Daily Price in CAD" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="workspacerentstatus" style="color:#213159">Rent Status</label>
+              </td>
+              <td>
+                <input type="radio" name="workspacerentstatus" value="Available"  required />
+                <label for="workspacerentstatus">Available</label>
+                <input type="radio" name="workspacerentstatus" value="Booked"  required />
+                <label for="workspacerentstatus">Booked</label>
+              </td>
+            </tr>
+
+            <td>
+              <label for="workspacestatus" style="color:#213159">Workspace Status</label>
+            </td>
+            <td>
+              <input type="radio" name="workspacestatus" value="Operational"  required />
+              <label for="workspacestatus">Operational</label>
+              <input type="radio" name="workspacestatus" value="Temporary Unserviceable"  required />
+              <label for="workspacestatus">Temporary Unserviceable</label>
+              <input type="radio" name="workspacestatus" value="Closed"  required />
+              <label for="workspacestatus">Closed</label>
+            </td>
+          </tr>
+
+          </table>
+          <input class="button button1" style="color: #cecece" type="submit" value="ADD WORKSPACE" />
+        </form>
+
       </article>
     </main>  
 

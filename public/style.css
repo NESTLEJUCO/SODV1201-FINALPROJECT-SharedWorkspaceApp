@@ -264,7 +264,7 @@ p {
 }
 
 table {
-  width: 80%;
+  width: 100%;
   border-spacing: 5px;
   color: #c7c7c7;
 }
@@ -278,6 +278,7 @@ td {
   background-color: #ececec;
   padding: 10px 0px 10px 0px;
   border-radius: 5px;
+  color: #213159;
 }
 
 #total {
@@ -368,6 +369,7 @@ footer {
     font-size: 12px;
     padding-left: 0px;
     padding-right: 0px;
+    width: 100%;
   }
 
   table {
@@ -493,4 +495,28 @@ footer {
   .menu > li:not(:last-child) {
     border-bottom: 1px solid #444444;
   }
+}
+
+/* Dev Port Layout */
+.devportfolio {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 20px;
+  align-items: center;
+}
+
+.photo {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  -webkit-flex: 4;
+  -ms-flex: 4;
+  flex: 4;
+}
+
+#h3dev {
+  text-align: center;
+  margin: 20px;
 }

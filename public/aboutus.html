@@ -122,58 +122,45 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
     </div>
 
     <!--Main Content-->
-  <main>
-  <article>
-    <img class="imgcustom" src="images/login.png" alt="login">
-  </article>
-  <article id="loginsection">
-    <h2 id="h3custom">LOGIN</h2>
-        <p style="text-align: left;">Login to list space or book your workplace</p>
-    <hr />
-    <br>
-    <form id="loginForm" action="/login" method="post">
-      <table align="center" style="width: 50%;">
-        <tr>
-          <td>
-            <label for="username">Username</label>
-          </td>
-          <td>
-            <input type="text" name="username" placeholder="Enter Username" required />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="password">Password</label>
-          </td>
-          <td>
-            <input type="password" name="password" placeholder="Enter Password" required />
-          </td>
-        </tr>
-      </table>
-      <input class="button button1" style="color: #cecece" type="submit" title="Click to Login" value="LOGIN" /> 
-    </form>
+    <main>
+      <article>
+        <h2 id="h2custom">WEB DEVELOPERS</h2>
+        <p>Meet Our Team Members</p>
+        <hr />
+      </article>
+    </main>
+    
+        <div class="devportfolio">
 
-      <script>
-        // Check if there is an error message in the query string
-        const urlParams = new URLSearchParams(window.location.search);
-        const errorMessage = urlParams.get('error');
-        
-        if (errorMessage) {
-          // Display the error message in the designated placeholder
-          document.getElementById('errorMessage').textContent = errorMessage;
-        }
-      </script>
-          <p id="errorMessage" style="color: red;"></p>
-    <hr>
-        <p style="text-align: left; font-size: medium;">Doesn't have an account yet? Click to <a href="signup.html#signupsection" title="Click to Sign Up">Sign Up</a></p>
-  </article>
-  </main>
+            <div class="photo">
+              <img class="imgcustom" src="images/Nestle.png" alt="Nestle Juco" />
+              <br/>
+              <div><h3 id="h3dev">Nestle Juco</h3></div>
+              
+            </div>
+      
+            <div class="photo">
+              <img class="imgcustom" src="images/Sheryl.png" alt="Sheryl Lugti" />
+              <br/>
+              <h3 id="h3dev">Sheryl Lugti</h3>
+            </div>
+      
+            <div class="photo">
+              <img class="imgcustom" src="images/Sean.png" alt="Aldwin Sean M. Eje" />
+              <br/>
+              <h3 id="h3dev">Aldwin Sean M. Eje</h3>
+            </div>
+      
+            <div class="photo">
+              <img class="imgcustom" src="images/Lady.png" alt="Lady Rose Alarcon" />
+              <br/>
+              <h3 id="h3dev">Lady Rose Alarcon</h3>
+            </div>
+          </div> 
 
     <!--Footer-->
     <footer>
-      <p class="pfooter">
-        © 2023 All Rights Reserved. SpaceShare
-      </p>
+      <p class="pfooter">© 2023 All Rights Reserved. SpaceShare.</p>
     </footer>
   </body>
 </html>
