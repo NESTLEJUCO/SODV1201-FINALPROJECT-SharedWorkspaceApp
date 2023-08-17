@@ -1,3 +1,4 @@
+
 <!-- Name: Course Project - CoWorking Registry Web App
 Course Code: SODV1201
 Class: Software Development Diploma program.
@@ -131,7 +132,7 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
         <hr />
         <section style="text-align: right">
           <label>SEARCH</label>
-      <input type="text" id="propertySearchInput" oninput="updatePropertyTable()">
+      <input type="text" id="propertySearchInput" oninput="searchPropertyTable()" placeholder="Enter Address, Size, Etc.">
       &nbsp;
           <label>SORT BY</label>
           <select
@@ -145,8 +146,9 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
             <option value="propertyaddress">Address</option>
             <option value="propertyneighborhood">Neighborhood</option>
             <option value="propertysize">Size</option>
+            <option value="propertysize">Parking</option>
             <option value="propertypubtranspo">Public Transportation</option>
-            <option value="propertystatus">Status</option>
+            <option value="propertystatus">Property Status</option>
           </select>
         </section>
       </article>
@@ -166,31 +168,80 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
       </tr>
       <tbody id="propertyTableBody"></tbody>
     </table>
-  
+
+<!-- Delete Property JS Function -->
 <script>
+  // Function to delete a property row
+  function deletePropertyRow(event) {
+  const row = event.target.closest("tr");
+  const propertyId = row.querySelector("td:first-child").innerText; // Get the Property ID from the first column
+  const confirmDelete = confirm("Are you sure you want to delete this property ID " + propertyId + "?");
+
+  if (confirmDelete) {
+    fetch(`http://localhost:8081/property/${propertyId}`, { //CORRECTED FETCH PATH
+      method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        row.remove();
+        // Update property array and write to property.json
+        property = property.filter(prop => prop.propertyid !== propertyId);
+        fs.writeFileSync("property.json", JSON.stringify(property));
+        alert("Property deleted successfully.");
+      } else {
+        alert("Failed to delete property.");
+      }
+    })
+    .catch(error => {
+      console.error("Error deleting property:", error);
+      // alert("An error occurred while deleting the property.");
+    });
+  }
+}
+
+  // Attach click event listener to the delete property buttons
+  document.addEventListener("DOMContentLoaded", function() {
+    const deletePropertyButtons = document.querySelectorAll(".button1.delete-property-button");
+    deletePropertyButtons.forEach(button => {
+      button.addEventListener("click", deletePropertyRow);
+    });
+  });
+</script>
+    
+<!-- Property View, Search and Sort JS Function  -->
+<script>
+searchPropertyTable();
+
+function searchPropertyTable(){
   const propertyTableBody = document.getElementById("propertyTableBody");
 
   fetch("/property")
     .then((response) => response.json())
     .then((properties) => {
       let sortedProperties = properties; // Initially use the original order
-
+      console.log(properties)
       function updatePropertyTable() {
-        const propertySearchInput = document.getElementById("propertySearchInput").value.toLowerCase();
+        const propertySearchInput = document.getElementById("propertySearchInput").value;
         propertyTableBody.innerHTML = ""; // Clear existing rows
 
         sortedProperties.forEach((property) => {
-          if (property.propertyaddress.toLowerCase().includes(propertySearchInput) || property.propertytype.toLowerCase().includes(propertySearchInput)) {
+          //Search Table Content
+          if (property.propertyaddress.includes(propertySearchInput) || property.propertysize.includes(propertySearchInput) || property.propertyneighborhood.includes(propertySearchInput) || property.propertyparking.includes(propertySearchInput) || property.propertypubtranspo.includes(propertySearchInput) || property.propertystatus.includes(propertySearchInput)) {
             const row = document.createElement("tr");
             row.innerHTML = `
               <td>${property.propertyid}</td>
               <td>${property.propertyaddress}</td>
               <td>${property.propertyneighborhood}</td>
-              <td>${property.propertysize}</td>
+              <td>${property.propertysize}&nbsp;sq.ft</td>
               <td>${property.propertyparking}</td>
               <td>${property.propertypubtranspo}</td>
               <td>${property.propertystatus}</td>
-              <td><button class="button button1" style="color: #CCCCCC">EDIT</button><br><button class="button button1" style="color: #CCCCCC">DELETE</button></td>
+              <td>
+                <a class="button button1" href="editproperty.html?propertyId=${property.propertyid}#listproperty" style="color: #CCCCCC">EDIT</a><br>
+                <button class="button button1 .delete-property-button" style="color: #CCCCCC" onclick="deletePropertyRow(event);">DELETE</button>
+              </td>
+
             `;
             propertyTableBody.appendChild(row);
           }
@@ -216,10 +267,9 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
       });
     })
     .catch((error) => console.error("Error fetching properties:", error));
+  }
 </script>
   
-
-
     <br />
     <hr />
       </article>
@@ -230,7 +280,10 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
         <h2 id="h2custom" style="text-align: left;">VIEW WORKSPACES</h2>
         <p style="text-align: left;">View list of workspaces</p>
         <hr />
-          <section style="text-align: right">
+        <section style="text-align: right">
+          <label>SEARCH</label>
+        <input type="text" id="workspaceSearchInput" oninput="searchWorkspaceTable()" placeholder="Enter Type, Seating, Price">
+        &nbsp;
           <label>SORT BY</label>
           <select
             id="sortselectws"
@@ -247,15 +300,15 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
             <option value="workspacesmoking">Smoking</option>
             <option value="workspacedateavailable">Date Available</option>
             <option value="workspacedailyprice">Daily Price</option>
-            <option value="workspacestatus">Rent Status</option>
-
+            <option value="workspacerentstatus">Rent Status</option>
+            <option value="workspacestatus">Workspace Status</option>
           </select>
         </section>
       </article>
     </main>
     <main>
-      <article>
-<table style="text-align: center">
+    <article>
+    <table style="text-align: center">
       <tr>
         <th>Workspace ID</th>
         <th>Property ID</th>
@@ -268,12 +321,56 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
         <th>Daily Price</th>
         <th>Rent Status</th>
         <th>Workspace Status</th>
+        <th>Contact Information</th>
         <th>Action</th>
       </tr>
       <tbody id="workspaceTableBody"></tbody>
     </table>
-    
+
+<!-- Delete Workspace JS Function -->
 <script>
+  // Function to delete a workspace row
+  function deleteWorkspaceRow(event) {
+  const row = event.target.closest("tr");
+  const workspaceId = row.querySelector("td:first-child").innerText; // Get the workspace ID from the first column
+  const confirmDelete = confirm("Are you sure you want to delete this workspace ID " + workspaceId + "?");
+
+  if (confirmDelete) {
+    fetch(`http://localhost:8081/workspace/${workspaceId}`, { //CORRECTED FETCH PATH
+      method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        row.remove();
+        // Update workspace array and write to workspace.json
+        workspace = workspace.filter(space => space.workspaceid !== workspaceId);
+        fs.writeFileSync("workspace.json", JSON.stringify(workspace));
+        alert("Workspace deleted successfully.");
+      } else {
+        alert("Failed to delete workspace.");
+      }
+    })
+    .catch(error => {
+      console.error("Error deleting workspace:", error);
+    });
+  }
+}
+
+  // Attach click event listener to the delete property buttons
+  document.addEventListener("DOMContentLoaded", function() {
+    const deletePropertyButtons = document.querySelectorAll(".button1.delete-property-button");
+    deletePropertyButtons.forEach(button => {
+      button.addEventListener("click", deletePropertyRow);
+    });
+  });
+</script>
+
+<!-- Workspace View, Search and Sort JS Function  -->
+<script>
+  searchWorkspaceTable();
+
+  function searchWorkspaceTable(){
  const workspaceTableBody = document.getElementById("workspaceTableBody");
 
   fetch("/workspace")
@@ -283,9 +380,11 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
       let sortedworkspace = workspace; // Initially use the original order
 
       function updateWorkspaceTable() {
+        const workspaceSearchInput = document.getElementById("workspaceSearchInput").value;
         workspaceTableBody.innerHTML = ""; // Clear existing rows
 
         sortedworkspace.forEach((workspace) => {
+          if(workspace.workspacetype.includes(workspaceSearchInput) || workspace.workspaceaddress.includes(workspaceSearchInput) || workspace.workspaceneighborhood.includes(workspaceSearchInput) || workspace.seatingcapacity.includes(workspaceSearchInput) || workspace.workspacesmoking.includes(workspaceSearchInput) || workspace.workspacedateavailable.includes(workspaceSearchInput) || workspace.workspacedailyprice.includes(workspaceSearchInput) || workspace.workspacerentstatus.includes(workspaceSearchInput) || workspace.workspacestatus.includes(workspaceSearchInput)){
           const row = document.createElement("tr");
           row.innerHTML = `
         <td>${workspace.workspaceid}</td>
@@ -293,18 +392,23 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
         <td>${workspace.workspacetype}</td>
         <td>${workspace.workspaceaddress}</td>
         <td>${workspace.workspaceneighborhood}</td>
-        <td>${workspace.seatingcapacity}</td>
+        <td>${workspace.seatingcapacity}&nbsp;seat/s</td>
         <td>${workspace.workspacesmoking}</td>
         <td>${workspace.workspacedateavailable}</td>
-        <td>${workspace.workspacedailyprice}</td>
+        <td>$${workspace.workspacedailyprice}</td>
         <td>${workspace.workspacerentstatus}</td>
         <td>${workspace.workspacestatus}</td>
-        <td><button class="button button1" style="color: #CCCCCC">EDIT</button><button class="button button1" style="color: #CCCCCC">DELETE</button></td>
+        <td>${workspace.workspacecontactinfo}</td>
+        <td>
+          <a class="button button1" href="editworkspace.html?workspaceId=${workspace.workspaceid}#listworkspace" style="color: #CCCCCC">EDIT</a><br>
+          <button class="button button1 .delete-property-button" style="color: #CCCCCC" onclick="deleteWorkspaceRow(event);">DELETE</button>
+        </td>
           `;
           workspaceTableBody.appendChild(row);
+          }
         });
       }
-
+    
       updateWorkspaceTable();
 
       const sortselectws = document.getElementById("sortselectws");
@@ -324,6 +428,7 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
       });
     })
     .catch((error) => console.error("Error fetching workspace:", error));
+  }
 </script>
     <br />
     <hr />

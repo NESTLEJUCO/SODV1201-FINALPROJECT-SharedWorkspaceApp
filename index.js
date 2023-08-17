@@ -49,10 +49,6 @@ app.get("/users", (req, res) => {
 //   );
 // });
 
-app.get("/users", (req, res) => {
-  res.send(users);
-});
-
 app.post("/register", (req, res) => {
   users.push(req.body);
 
@@ -68,7 +64,7 @@ app.post("/register", (req, res) => {
   );
 });
 
-//Property registration
+// Property registration
 let property = [];
 if (fs.existsSync("property.json")) {
   let propdata = fs.readFileSync("property.json", "utf-8");
@@ -77,6 +73,19 @@ if (fs.existsSync("property.json")) {
 
 app.get("/property", (req, res) => {
   res.send(property);
+});
+
+// Retrieve property by ID
+app.get("/property/:propertyId", (req, res) => {
+  const propertyId = req.params.propertyId;
+
+  const foundProperty = property.find((prop) => prop.propertyid === propertyId);
+
+  if (foundProperty) {
+    res.json(foundProperty);
+  } else {
+    res.status(404).json({ success: false, message: "Property not found." });
+  }
 });
 
 app.post("/addProperty", (req, res) => {
@@ -93,6 +102,47 @@ app.post("/addProperty", (req, res) => {
   );
 });
 
+// PROPERTY DELETE endpoint for deleting a Property by ID
+app.delete("/property/:id", (req, res) => {
+  //CORRECTED SERVER ENDPOINT ADTA HANDLING
+  const propertyId = req.params.id;
+
+  // Find the index of the property with the given ID
+  const propertyIndex = property.findIndex(
+    (property) => property.propertyid === propertyId
+  );
+
+  if (propertyIndex !== -1) {
+    // Remove the property from the array
+    property.splice(propertyIndex, 1);
+
+    fs.writeFileSync("property.json", JSON.stringify(property));
+    res.json({ success: true, message: "Property deleted successfully." });
+  } else {
+    res.status(404).json({ success: false, message: "Property not found." });
+  }
+});
+
+// WORKSPACE DELETE endpoint for deleting a Workspace by ID
+app.delete("/workspace/:id", (req, res) => {
+  const workspaceId = req.params.id;
+
+  // Find the index of the workspace with the given ID
+  const workspaceIndex = workspace.findIndex(
+    (workspace) => workspace.workspaceid === workspaceId
+  );
+
+  if (workspaceIndex !== -1) {
+    // Remove the workspace from the array
+    workspace.splice(workspaceIndex, 1);
+
+    fs.writeFileSync("workspace.json", JSON.stringify(workspace));
+    res.json({ success: true, message: "Workspace deleted successfully." });
+  } else {
+    res.status(404).json({ success: false, message: "Workspace not found." });
+  }
+});
+
 //Workspace registration
 let workspace = [];
 if (fs.existsSync("workspace.json")) {
@@ -102,6 +152,21 @@ if (fs.existsSync("workspace.json")) {
 
 app.get("/workspace", (req, res) => {
   res.send(workspace);
+});
+
+// Retrieve Workspace by ID
+app.get("/workspace/:workspaceId", (req, res) => {
+  const workspaceId = req.params.workspaceId;
+
+  const foundWorkspace = workspace.find(
+    (space) => space.workspaceid === workspaceId
+  );
+
+  if (foundWorkspace) {
+    res.json(foundWorkspace);
+  } else {
+    res.status(404).json({ success: false, message: "Workspace not found." });
+  }
 });
 
 app.post("/addWorkSpace", (req, res) => {
@@ -118,9 +183,9 @@ app.post("/addWorkSpace", (req, res) => {
   );
 });
 
-//Login Validation
+// Booking Handler
 
-//Routing and URL Forwarding
+//Login Validation - Routing and URL Forwarding
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
 

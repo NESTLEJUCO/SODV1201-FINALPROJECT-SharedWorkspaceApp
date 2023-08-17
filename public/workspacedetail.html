@@ -1,0 +1,355 @@
+
+<!-- Name: Course Project - CoWorking Registry Web App
+Course Code: SODV1201
+Class: Software Development Diploma program.
+Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="script.js" defer></script>
+    <title>SPACESHARE - Your workplace anytime, anywhere</title>
+  </head>
+  <body>
+    
+    <!--Quick Links-->
+    <div class="quicklinks">
+      <div>
+        <ul class="qlinkitems">
+          <li>
+            <i
+              class="fa fa-envelope"
+              style="font-size: 20px; color: #c7c7c7"
+            ></i
+            >&nbsp;<a
+              href="mailto:info@spaceshare.com"
+              title="E-mail Us"
+              style="color: #c7c7c7"
+              >info@spaceshare.com</a
+            >
+          </li>
+          <li>
+            <i class="fa fa-phone" style="font-size: 20px; color: #c7c7c7"></i
+            >&nbsp;<a
+              href="tel:+18255587624"
+              title="Call Us"
+              style="color: #c7c7c7"
+              >825.558.7624</a
+            >
+          </li>
+          <li>
+            <i
+              class="fa fa-calendar"
+              style="font-size: 20px; color: #c7c7c7"
+            ></i
+            >&nbsp;Mon - Sun 6:00am - 12:00mn
+          </li>
+        </ul>
+      </div>
+      <div>&nbsp;</div>
+      <div class="qlinkitems">
+        <li>
+          <a href="#" title="facebook"
+            ><i class="fa fa-facebook" style="font-size: 20px"></i
+          ></a>
+        </li>
+        <li>
+          <a href="#" title="linkedin"
+            ><i class="fa fa-linkedin" style="font-size: 20px"></i
+          ></a>
+        </li>
+        <li>
+          <a href="#" title="twitter"
+            ><i class="fa fa-twitter" style="font-size: 20px"></i
+          ></a>
+        </li>
+      </div>
+    </div>
+
+    <!--Header-->
+    <header>
+      <div class="logo">
+        <h1 id="h1custom">SPACESHARE - COWORKER BOOKING DASHBOARD</h1>
+      </div>
+      <div>&nbsp;</div>
+      <input id="menu-toggle" type="checkbox" />
+      <label class="menu-button-container" for="menu-toggle">
+        <div class="menu-button"></div>
+      </label>
+      <ul class="menu">
+        <!-- Need to put link for the Search and the rest -->
+        <li>
+          <a href="http://localhost:8081/coworkerview.html#booksearch" title="SEARCH">SEARCH</a>
+        </li>
+        <li>
+          <a href="http://localhost:8081/coworkerview.html#booksection" title="BOOK">BOOK</a>
+        </li>
+        <li>
+            <a href="http://localhost:8081/mybooking.html" title="MY BOOKING">MY BOOKING</a>
+          </li>
+        <li>
+          <button class="button button1">
+            <a href="index.html" title="Logout" style="color: #cecece">LOGOUT</a>
+          </button>
+        </li>
+      </ul>
+    </header>
+
+    <!--Banner Slideshow-->
+    <div class="slideshow-container">
+      <div class="mySlides">
+        <img src="images/banner1.png" style="width: 100%" />
+      </div>
+
+      <div class="mySlides">
+        <img src="images/banner2.png" style="width: 100%" />
+      </div>
+
+      <div class="mySlides">
+        <img src="images/banner3.png" style="width: 100%" />
+      </div>
+
+      <div class="mySlides">
+        <img src="images/banner4.png" style="width: 100%" />
+      </div>
+    <br />
+
+    <div style="text-align: center">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <!--Main Content-->
+    <main>
+      <article id="listworkspace">
+        <h2 id="h3custom">WORKSPACE DETAILS</h2>
+        <p style="text-align: left;">Workspace Details Preview</p>
+        <hr />
+        <article>
+        <img src="images/workspace.png" alt="Workspace" width="100%"/>
+        </article>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const queryParams = new URLSearchParams(window.location.search);
+    const workspaceId = queryParams.get("workspaceId");
+
+    // Fetch the workspace by ID and populate the form fields
+    fetch(`/workspace/${workspaceId}`)
+      .then((response) => response.json())
+      .then((workspace) => {
+
+      document.getElementById("workspaceid").value = workspace.workspaceid;
+      document.getElementById("propertyid").value = workspace.propertyid;
+      
+      if (workspace.workspacetype == "Personal Desk") {
+        document.getElementById("workspacetype1").checked = true;
+        } else if (workspace.workspacetype == "Meeting Room") {
+          document.getElementById("workspacetype2").checked = true;
+        } else if (workspace.workspacetype == "Private Room") {
+          document.getElementById("workspacetype3").checked = true;
+        } else if (workspace.workspacetype == "Personal Desk,Meeting Room") {
+          document.getElementById("workspacetype1").checked = true;
+          document.getElementById("workspacetype2").checked = true;
+        } else if (workspace.workspacetype == "Personal Desk,Private Room") {
+          document.getElementById("workspacetype1").checked = true;
+          document.getElementById("workspacetype3").checked = true;
+        } else if (workspace.workspacetype == "Meeting Room,Private Room") {
+          document.getElementById("workspacetype2").checked = true;
+          document.getElementById("workspacetype3").checked = true;
+        } else {
+          document.getElementById("workspacetype1").checked = true;
+          document.getElementById("workspacetype2").checked = true;
+          document.getElementById("workspacetype3").checked = true;
+        }
+
+
+      document.getElementById("workspaceaddress").value = workspace.workspaceaddress;
+      
+      document.getElementById("workspaceneighborhood").value = workspace.workspaceneighborhood;
+
+      document.getElementById("seatingcapacity").value = workspace.seatingcapacity;
+
+      if (workspace.workspacesmoking === "Yes") {
+          document.getElementById("workspacesmoking1").checked = true;
+      } else {
+          document.getElementById("workspacesmoking2").checked = true;
+        }
+
+      document.getElementById("workspacedateavailable").value = workspace.workspacedateavailable;
+
+      document.getElementById("workspacedailyprice").value = workspace.workspacedailyprice;
+
+      document.getElementById("workspacecontactinfo").value = workspace.workspacecontactinfo;
+
+      // document.getElementById("workspacerentstatus").value = workspace.workspacerentstatus;
+
+      if (workspace.workspacerentstatus === "Yes") {
+          document.getElementById("workspacerentstatus1").checked = true;
+        } else {
+          document.getElementById("workspacerentstatus2").checked = true;
+        }
+
+      // document.getElementById("workspacestatus").value = workspace.workspacestatus;
+
+      if (workspace.workspacestatus == "Operational") {
+        document.getElementById("workspacestatus1").checked = true;
+        } else if (workspace.workspacestatus == "Temporary Unserviceable") {
+          document.getElementById("workspacestatus2").checked = true;
+        } else if (workspace.workspacestatus == "Closed") {
+          document.getElementById("workspacestatus3").checked = true;
+        }
+
+      })
+      .catch((error) => console.error("Error fetching property:", error));
+  });
+</script>
+
+        <form>
+          <table align="center" style="width: 50%;">
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="workspaceid">Workspace ID</label>
+              </td>
+              <td>
+                <input style="border: none; background-color: #ececec; text-align: center; font-size: medium;" id="workspaceid" type="number" name="workspaceid" readonly />
+              </td>
+            </tr>
+
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="propertyid">Property ID</label>
+              </td>
+              <td>
+                <input style="border: none; background-color: #ececec; text-align: center; font-size: medium;"  id="propertyid" type="number" name="propertyid" readonly/>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="workspacetype">Type</label>
+              </td>
+              <td>
+                <input id="workspacetype1" type="radio" name="workspacetype" value="Personal Desk" readonly/>
+                <label for="workspacetype">Personal Desk</label>
+                <input id="workspacetype2" type="radio" name="workspacetype" value="Meeting Room" readonly/>
+                <label for="workspacetype">Meeting Room</label>
+                <input id="workspacetype3" type="radio" name="workspacetype" value="Private Room" readonly/>
+                <label for="workspacetype">Private Room</label>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="workspaceaddress">Address</label>
+              </td>
+              <td>
+                <input style="border: none; background-color: #ececec; text-align: center; font-size: medium;"  id="workspaceaddress" type="text" name="workspaceaddress" readonly />
+              </td>
+            </tr>
+
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="workspaceneighborhood">Neighborhood</label>
+              </td>
+              <td>
+                <input style="border: none; background-color: #ececec; text-align: center; font-size: medium;"  id="workspaceneighborhood" type="text" name="workspaceneighborhood" readonly />
+              </td>
+            </tr>
+
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="seatingcapacity">Seating Capacity</label>
+              </td>
+              <td>
+                <input style="border: none; background-color: #ececec; text-align: center; font-size: medium;" id="seatingcapacity" type="number" name="seatingcapacity" readonly />
+              </td>
+            </tr>
+
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="workspacesmoking">Smoking</label>
+              </td>
+              <td>
+                <input id="workspacesmoking1" type="radio" name="workspacesmoking" value="Allowed"  readonly />
+                <label for="workspacesmoking">Allowed</label>
+                <input id="workspacesmoking2" type="radio" name="workspacesmoking" value="Not Allowed"  readonly />
+                <label for="workspacesmoking">Not Allowed</label>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="workspacedateavailable">Date Available</label>
+              </td>
+              <td>
+                <input style="border: none; background-color: #ececec; text-align: center; font-size: medium;" id="workspacedateavailable" type="date" name="workspacedateavailable" readonly />
+              </td>
+            </tr>
+
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="workspacedailyprice">Daily Price</label>
+              </td>
+              <td>
+                <input style="border: none; background-color: #ececec; text-align: center; font-size: medium;" id="workspacedailyprice" type="number" name="workspacedailyprice" readonly />
+              </td>
+            </tr>
+            
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="workspacerentstatus">Rent Status</label>
+              </td>
+              <td>
+                <input id="workspacerentstatus1" type="radio" name="workspacerentstatus" value="Available"  readonly />
+                <label for="workspacerentstatus">Available</label>
+                <input id="workspacerentstatus2" type="radio" name="workspacerentstatus" value="Booked"  readonly />
+                <label for="workspacerentstatus">Booked</label>
+              </td>
+            </tr>
+            
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="workspacestatus">Workspace Status</label>
+              </td>
+              <td>
+                <input id="workspacestatus1" type="radio" name="workspacestatus" value="Operational"  readonly />
+                <label for="workspacestatus">Operational</label>
+                <input id="workspacestatus2" type="radio" name="workspacestatus" value="Temporary Unserviceable"  readonly />
+                <label for="workspacestatus">Temporary Unserviceable</label>
+                <input id="workspacestatus3" type="radio" name="workspacestatus" value="Closed"  readonly />
+                <label for="workspacestatus">Closed</label>
+              </td>
+            </tr>
+            
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="workspacecontactinfo">Contact Information</label>
+              </td>
+              <td>
+                <input style="border: none; background-color: #ececec; text-align: center; font-size: medium;" id="workspacecontactinfo" type="number" name="workspacecontactinfo" readonly />
+              </td>
+            </tr>
+          </table>
+          <hr>
+           <p style="text-align: center; font-size: medium;">Want to book a workspace? Click to <a href="coworkerview.html#booksection" title="Click to Book Workspace">Book Workspace</a></p>
+        </form>
+
+      </article>
+    </main>  
+
+    <!--Footer-->
+    <footer>
+      <p class="pfooter">© 2023 All Rights Reserved. SpaceShare.</p>
+    </footer>
+  </body>
+</html>

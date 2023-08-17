@@ -1,4 +1,5 @@
 
+
 <!-- Name: Course Project - CoWorking Registry Web App
 Course Code: SODV1201
 Class: Software Development Diploma program.
@@ -82,7 +83,9 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
         <div class="menu-button"></div>
       </label>
       <ul class="menu">
+        <li><a href="#booksearch" title="SEARCH" onclick="searchWorkspaceTable(this.value);">SEARCH</a></li>
         <li><a href="#booksection" title="BOOK">BOOK</a></li>
+        <li><a href="http://localhost:8081/mybooking.html" title="MY BOOKING">MY BOOKING</a></li>
         <li>
           <button class="button button1">
             <a href="index.html" title="Logout" style="color: #cecece">LOGOUT</a>
@@ -118,13 +121,13 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
     </div>
     <!--Main Content-->
      <main>
-      <article>
+     <!-- <article id="booksearch">
         <h2 id="h3custom" style="padding-top: 10px;">SEARCH</h2>
         <p class="pmedium">
           Search Property or Workspace 
         </p>
         <hr />
-        <form id="" action="" method="" style="padding-top: 30px;">
+       <form id="" action="" method="" style="padding-top: 30px;">
           <input type="text" id="search" name="search" placeholder="Search property or workspace" size="25" required>
           <input class="button button1" style="color: #cecece" type="submit" value="SEARCH" />
         </form>
@@ -160,15 +163,19 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
             <option value="propertystatus">Workspace Status</option>
           </select>
         </section>
-      </article>
+      </article> -->
     </main>
 
     <main>
-      <article id="viewproperty">
+      <article id="booksearch">
         <h2 id="h2custom" style="text-align: left;">SEARCH PROPERTIES</h2>
-        <p style="text-align: left;">Search and View Properties</p>
+        <p style="text-align: left;">Search and View Listed Properties</p>
         <hr />
+        <!-- Add Search Box and make it functional using the code in the ownerview.html Sort here and  -->
         <section style="text-align: right">
+          <label>SEARCH:</label>
+          <input type="text" id="propertySearchInput" oninput="searchPropertyTable()" placeholder="Enter Address, Size, Etc.">
+          &nbsp;
           <label>SORT BY</label>
           <select
             id="sortselect"
@@ -181,8 +188,9 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
             <option value="propertyaddress">Address</option>
             <option value="propertyneighborhood">Neighborhood</option>
             <option value="propertysize">Size</option>
+            <option value="propertysize">Parking</option>
             <option value="propertypubtranspo">Public Transportation</option>
-            <option value="propertystatus">Status</option>
+            <option value="propertystatus">Property Status</option>
           </select>
         </section>
       </article>
@@ -204,6 +212,9 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
     </table>
   
 <script>
+  searchPropertyTable();
+
+  function searchPropertyTable(){
   const propertyTableBody = document.getElementById("propertyTableBody");
 
   fetch("/property")
@@ -212,21 +223,25 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
       let sortedProperties = properties; // Initially use the original order
 
       function updatePropertyTable() {
+        const propertySearchInput = document.getElementById("propertySearchInput").value;
         propertyTableBody.innerHTML = ""; // Clear existing rows
 
         sortedProperties.forEach((property) => {
+          if(property.propertyaddress.includes(propertySearchInput) || property.propertyneighborhood.includes(propertySearchInput) || property.propertysize.includes(propertySearchInput) || property.propertyparking.includes(propertySearchInput) || property.propertypubtranspo.includes(propertySearchInput) || property.propertystatus.includes(propertySearchInput) ){
           const row = document.createElement("tr");
           row.innerHTML = `
-            <td>${property.propertyid}</td>
-            <td>${property.propertyaddress}</td>
-            <td>${property.propertyneighborhood}</td>
-            <td>${property.propertysize}</td>
-            <td>${property.propertyparking}</td>
-            <td>${property.propertypubtranspo}</td>
-            <td>${property.propertystatus}</td>
-            <td><button class="button button1" style="color: #CCCCCC">VIEW</button></td>
-          `;
+              <td>${property.propertyid}</td>
+              <td>${property.propertyaddress}</td>
+              <td>${property.propertyneighborhood}</td>
+              <td>${property.propertysize}&nbsp;sq.ft</td>
+              <td>${property.propertyparking}</td>
+              <td>${property.propertypubtranspo}</td>
+              <td>${property.propertystatus}</td>
+              <td>
+                <a class="button button1" href="propertydetails.html?propertyId=${property.propertyid}#listproperty" style="color: #CCCCCC">VIEW</a>
+              </td>`;
           propertyTableBody.appendChild(row);
+          }
         });
       }
 
@@ -249,6 +264,7 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
       });
     })
     .catch((error) => console.error("Error fetching properties:", error));
+  }
 </script>
   
     <br />
@@ -257,11 +273,16 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
     </main>
 
     <main>
+      <!-- make a different ID for the article when a user click Search, Book, MyBook it will jump on to it -->
       <article id="booksection">
         <h2 id="h2custom" style="text-align: left;">BOOK WORKSPACES</h2>
-        <p style="text-align: left;">Search and View Your Workspace</p>
+        <p style="text-align: left;">Search and Book Your Workspace</p>
         <hr />
+         <!-- Add Search Box and make it functional using the code in the ownerview.html Sort here and  -->
           <section style="text-align: right">
+          <label>SEARCH:</label>
+          <input type="text" id="workspaceSearchInput" oninput="searchWorkspaceTable()" placeholder="Enter Type, Seating, Price">
+            &nbsp;
           <label>SORT BY</label>
           <select
             id="sortselectws"
@@ -278,15 +299,15 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
             <option value="workspacesmoking">Smoking</option>
             <option value="workspacedateavailable">Date Available</option>
             <option value="workspacedailyprice">Daily Price</option>
-            <option value="workspacestatus">Rent Status</option>
-
+            <option value="workspacerentstatus">Rent Status</option>
+            <option value="workspacestatus">Workspace Status</option>
           </select>
         </section>
       </article>
     </main>
     <main>
       <article>
-<table style="text-align: center">
+    <table style="text-align: center">
       <tr>
         <th>Workspace ID</th>
         <th>Property ID</th>
@@ -299,13 +320,18 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
         <th>Daily Price</th>
         <th>Rent Status</th>
         <th>Workspace Status</th>
+        <th>Contact Information</th>
         <th>Action</th>
       </tr>
       <tbody id="workspaceTableBody"></tbody>
     </table>
-    
+
+<!-- Workspace View, Search and Sort JS Function  -->
 <script>
- const workspaceTableBody = document.getElementById("workspaceTableBody");
+  searchWorkspaceTable();
+
+  function searchWorkspaceTable(){
+  const workspaceTableBody = document.getElementById("workspaceTableBody");
 
   fetch("/workspace")
     .then((response) => response.json())
@@ -314,9 +340,11 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
       let sortedworkspace = workspace; // Initially use the original order
 
       function updateWorkspaceTable() {
+        const workspaceSearchInput = document.getElementById("workspaceSearchInput").value;
         workspaceTableBody.innerHTML = ""; // Clear existing rows
 
         sortedworkspace.forEach((workspace) => {
+          if(workspace.workspacetype.includes(workspaceSearchInput) || workspace.workspaceaddress.includes(workspaceSearchInput) || workspace.workspaceneighborhood.includes(workspaceSearchInput) || workspace.seatingcapacity.includes(workspaceSearchInput) || workspace.workspacesmoking.includes(workspaceSearchInput) || workspace.workspacedateavailable.includes(workspaceSearchInput) || workspace.workspacedailyprice.includes(workspaceSearchInput) || workspace.workspacerentstatus.includes(workspaceSearchInput) || workspace.workspacestatus.includes(workspaceSearchInput)){
           const row = document.createElement("tr");
           row.innerHTML = `
         <td>${workspace.workspaceid}</td>
@@ -324,15 +352,20 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
         <td>${workspace.workspacetype}</td>
         <td>${workspace.workspaceaddress}</td>
         <td>${workspace.workspaceneighborhood}</td>
-        <td>${workspace.seatingcapacity}</td>
+        <td>${workspace.seatingcapacity}&nbsp;seat/s</td>
         <td>${workspace.workspacesmoking}</td>
         <td>${workspace.workspacedateavailable}</td>
-        <td>${workspace.workspacedailyprice}</td>
+        <td>$${workspace.workspacedailyprice}</td>
         <td>${workspace.workspacerentstatus}</td>
         <td>${workspace.workspacestatus}</td>
-        <td><button class="button button1" style="color: #CCCCCC">VIEW</button><br><button class="button button1" style="color: #CCCCCC">BOOK</button></td>
+        <td>${workspace.workspacecontactinfo}</td>
+        <td>
+          <a class="button button1" href="workspacedetail.html?workspaceId=${workspace.workspaceid}#listworkspace" style="color: #CCCCCC">VIEW</a>
+          <button class="button button1 book-button" style="color: #CCCCCC">BOOK</button>
+        </td>
           `;
           workspaceTableBody.appendChild(row);
+          }
         });
       }
 
@@ -355,6 +388,52 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
       });
     })
     .catch((error) => console.error("Error fetching workspace:", error));
+  }
+
+  //Booking JS Function
+  document.addEventListener("DOMContentLoaded", function () {
+  const bookButtons = document.querySelectorAll(".book-button");
+
+  bookButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const row = this.parentNode.parentNode;
+      const rowData = {
+        workspaceId: row.cells[0].textContent,
+        propertyId: row.cells[1].textContent,
+        workspacetype: row.cells[2].textContent,
+        workspaceaddress: row.cells[3].textContent,
+        workspaceneighborhood: row.cells[4].textContent,
+        seatingcapacity: row.cells[5].textContent,
+        workspacesmoking: row.cells[6].textContent,
+        workspacedateavailable: row.cells[7].textContent,
+        workspacedailyprice: row.cells[8].textContent,
+        workspacerentstatus: row.cells[9].textContent,
+        workspacestatus: row.cells[10].textContent,
+        workspacecontactinfo: row.cells[11].textContent,
+      };
+
+      const confirmBooking = confirm("Confirm booking for:\n" + JSON.stringify(rowData, null, 2));
+      if (confirmBooking) {
+        // Make an API request to your backend to update the mybooking.json file
+        fetch("/mybooking", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(rowData),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            alert("Booking confirmed! Your booking has been updated.");
+          })
+          .catch((error) => {
+            console.error("Error updating booking:", error);
+          });
+      }
+    });
+  });
+});
+
 </script>
     <br />
     <hr />

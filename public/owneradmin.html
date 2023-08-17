@@ -1,3 +1,4 @@
+
 <!-- Name: Course Project - CoWorking Registry Web App
 Course Code: SODV1201
 Class: Software Development Diploma program.
@@ -192,7 +193,8 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
                 <label for="propertypubtranspo">Train</label>
                 <input type="checkbox" name="propertypubtranspo" value="Subway" />
                 <label for="propertypubtranspo">Subway</label>
-                <input type="hidden" name="propertypubtranspo" value="None" default />
+                <input type="checkbox" name="propertypubtranspo" value="None" />
+                <label for="propertypubtranspo" checked>None</label>
               </td>
             </tr>
 
@@ -324,18 +326,28 @@ Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
               </td>
             </tr>
 
-            <td>
-              <label for="workspacestatus" style="color:#213159">Workspace Status</label>
-            </td>
-            <td>
-              <input type="radio" name="workspacestatus" value="Operational"  required />
-              <label for="workspacestatus">Operational</label>
-              <input type="radio" name="workspacestatus" value="Temporary Unserviceable"  required />
-              <label for="workspacestatus">Temporary Unserviceable</label>
-              <input type="radio" name="workspacestatus" value="Closed"  required />
-              <label for="workspacestatus">Closed</label>
-            </td>
-          </tr>
+            <tr>
+              <td>
+                <label for="workspacestatus" style="color:#213159">Workspace Status</label>
+              </td>
+              <td>
+                <input type="radio" name="workspacestatus" value="Operational"  required />
+                <label for="workspacestatus">Operational</label>
+                <input type="radio" name="workspacestatus" value="Temporary Unserviceable"  required />
+                <label for="workspacestatus">Temporary Unserviceable</label>
+                <input type="radio" name="workspacestatus" value="Closed"  required />
+                <label for="workspacestatus">Closed</label>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label for="workspacecontactinfo" style="color:#213159">Contact Information</label>
+              </td>
+              <td>
+                <input type="number" name="workspacecontactinfo" placeholder="Enter Contact Number" required />
+              </td>
+            </tr>
 
           </table>
           <input class="button button1" style="color: #cecece" type="submit" value="ADD WORKSPACE" />
