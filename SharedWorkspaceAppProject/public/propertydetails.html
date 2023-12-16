@@ -1,0 +1,279 @@
+<!-- Name: Course Project - CoWorking Registry Web App
+Course Code: SODV1201
+Class: Software Development Diploma program.
+Author: Nestle Juco, Sheryl Lugti, Lady Rose Alarcon, Aldwin Sean Eje -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="script.js" defer></script>
+    <title>SPACESHARE - Your workplace anytime, anywhere</title>
+  </head>
+  <body>
+    
+    <!--Quick Links-->
+    <div class="quicklinks">
+      <div>
+        <ul class="qlinkitems">
+          <li>
+            <i
+              class="fa fa-envelope"
+              style="font-size: 20px; color: #c7c7c7"
+            ></i
+            >&nbsp;<a
+              href="mailto:info@spaceshare.com"
+              title="E-mail Us"
+              style="color: #c7c7c7"
+              >info@spaceshare.com</a
+            >
+          </li>
+          <li>
+            <i class="fa fa-phone" style="font-size: 20px; color: #c7c7c7"></i
+            >&nbsp;<a
+              href="tel:+18255587624"
+              title="Call Us"
+              style="color: #c7c7c7"
+              >825.558.7624</a
+            >
+          </li>
+          <li>
+            <i
+              class="fa fa-calendar"
+              style="font-size: 20px; color: #c7c7c7"
+            ></i
+            >&nbsp;Mon - Sun 6:00am - 12:00mn
+          </li>
+        </ul>
+      </div>
+      <div>&nbsp;</div>
+      <div class="qlinkitems">
+        <li>
+          <a href="#" title="facebook"
+            ><i class="fa fa-facebook" style="font-size: 20px"></i
+          ></a>
+        </li>
+        <li>
+          <a href="#" title="linkedin"
+            ><i class="fa fa-linkedin" style="font-size: 20px"></i
+          ></a>
+        </li>
+        <li>
+          <a href="#" title="twitter"
+            ><i class="fa fa-twitter" style="font-size: 20px"></i
+          ></a>
+        </li>
+      </div>
+    </div>
+
+    <!--Header-->
+    <header>
+      <div class="logo">
+        <h1 id="h1custom">SPACESHARE - COWORKER BOOKING DASHBOARD</h1>
+      </div>
+      <div>&nbsp;</div>
+      <input id="menu-toggle" type="checkbox" />
+      <label class="menu-button-container" for="menu-toggle">
+        <div class="menu-button"></div>
+      </label>
+      <ul class="menu">
+         <li>
+            <a href="http://localhost:8081/coworkerview.html#booksearch" title="SEARCH">SEARCH</a>
+          </li>
+          <li>
+            <a href="http://localhost:8081/coworkerview.html#booksection" title="BOOK">BOOK</a>
+          </li>
+          <li>
+              <a href="http://localhost:8081/mybooking.html" title="MY BOOKING">MY BOOKING</a>
+            </li>
+        <li>
+          <button class="button button1">
+            <a href="index.html" title="Logout" style="color: #cecece">LOGOUT</a>
+          </button>
+        </li>
+      </ul>
+    </header>
+
+    <!--Banner Slideshow-->
+    <div class="slideshow-container">
+      <div class="mySlides">
+        <img src="images/banner1.png" style="width: 100%" />
+      </div>
+
+      <div class="mySlides">
+        <img src="images/banner2.png" style="width: 100%" />
+      </div>
+
+      <div class="mySlides">
+        <img src="images/banner3.png" style="width: 100%" />
+      </div>
+
+      <div class="mySlides">
+        <img src="images/banner4.png" style="width: 100%" />
+      </div>
+    <br />
+
+    <div style="text-align: center">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <!--Main Content-->
+    <main>
+      <article id="listproperty">
+        <h2 id="h3custom">PROPERTY DETAILS</h2>
+        <p style="text-align: left;">Property Details Preview</p>
+        <hr />
+        <article>
+        <img src="images/property.png" alt="Property" width="100%"/>
+        </article>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const queryParams = new URLSearchParams(window.location.search);
+    const propertyId = queryParams.get("propertyId");
+
+    // Fetch the property by ID and populate the form fields
+    fetch(`/property/${propertyId}`)
+      .then((response) => response.json())
+      .then((property) => {
+        document.getElementById("propertyid").value = property.propertyid;
+        document.getElementById("propertyaddress").value = property.propertyaddress;
+        document.getElementById("propertyneighborhood").value = property.propertyneighborhood;
+        document.getElementById("propertysize").value = property.propertysize;
+
+        if (property.propertyparking === "Yes") {
+          document.getElementById("propertyparking1").checked = true;
+        } else {
+          document.getElementById("propertyparking2").checked = true;
+        }
+
+          if (property.propertypubtranspo == "Bus") {
+            document.getElementById("propertypubtranspo1").checked = true;
+          } else if (property.propertypubtranspo == "Train") {
+            document.getElementById("propertypubtranspo2").checked = true;
+          } else if (property.propertypubtranspo == "Subway") {
+            document.getElementById("propertypubtranspo3").checked = true;
+          } else if (property.propertypubtranspo == "Bus,Train") {
+            document.getElementById("propertypubtranspo1").checked = true;
+            document.getElementById("propertypubtranspo2").checked = true; 
+          } else if (property.propertypubtranspo == "Bus,Subway") {
+            document.getElementById("propertypubtranspo1").checked = true;
+            document.getElementById("propertypubtranspo3").checked = true; 
+          } else if (property.propertypubtranspo == "Train,Subway") {
+            document.getElementById("propertypubtranspo2").checked = true;
+            document.getElementById("propertypubtranspo3").checked = true; 
+          } else {
+            document.getElementById("propertypubtranspo1").checked = true;
+            document.getElementById("propertypubtranspo2").checked = true;
+            document.getElementById("propertypubtranspo3").checked = true;
+          } 
+
+
+        if (property.propertystatus === "Available") {
+          document.getElementById("propertystatus1").checked = true;
+        } else {
+          document.getElementById("propertystatus2").checked = true;
+        }
+      })
+      .catch((error) => console.error("Error fetching property:", error));
+  });
+</script>
+        <form>
+          <table align="center" style="width: 60%;">
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="propertyid">Property ID</label>
+              </td>
+              <td>
+                <input style="border: none; background-color: #ececec; text-align: center; font-size: medium;" id="propertyid" type="text" name="propertyid" readonly />
+              </td>
+            </tr>
+
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="propertyaddress">Address</label>
+              </td>
+              <td>
+                <input style="border: none; background-color: #ececec; text-align: center; font-size: medium;"  id="propertyaddress" type="text" name="propertyaddress" placeholder="Enter Address" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="propertyneighborhood">Neighborhood</label>
+              </td>
+              <td>
+                <input style="border: none; background-color: #ececec; text-align: center; font-size: medium;"  id="propertyneighborhood" type="text" name="propertyneighborhood" placeholder="Enter Neighborhood" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="propertysize">Size (sqft)</label>
+              </td>
+              <td>
+                <input style="border: none; background-color: #ececec; text-align: center; font-size: medium;"  id="propertysize" type="number" name="propertysize" required />
+              </td>
+            </tr>
+
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="propertyparking">Parking</label>
+              </td>
+              <td>
+                <input id="propertyparking1" type="radio" name="propertyparking" value="Yes"  required />
+                <label for="prop rtyparking">Yes</label>
+                <input id="propertyparking2" type="radio" name="propertyparking" value="No"  required />
+                <label for="propertyparking">No</label>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="propertypubtranspo">Public Transportation</label>
+              </td>
+              <td>
+                <input id="propertypubtranspo1" type="checkbox" name="propertypubtranspo" value="Bus" />
+                <label for="propertypubtranspo">Bus</label>
+                <input id="propertypubtranspo2" type="checkbox" name="propertypubtranspo" value="Train" />
+                <label for="propertypubtranspo">Train</label>
+                <input id="propertypubtranspo3" type="checkbox" name="propertypubtranspo" value="Subway" />
+                <label for="propertypubtranspo">Subway</label>
+                <input id="propertyaddress4" type="hidden" name="propertypubtranspo" value="None" default />
+              </td>
+            </tr>
+
+            <tr>
+              <td style="background-color:#213159; color: #ececec">
+                <label for="propertystatus">Property Status</label>
+              </td>
+              <td>
+                <input id="propertystatus1" type="radio" name="propertystatus" value="Available"  required />
+                <label for="propertystatus">Available</label>
+                <input id="propertystatus2" type="radio" name="propertystatus" value="Unavailable"  required />
+                <label for="propertystatus">Unavailable</label>
+              </td>
+            </tr>
+          </table>
+          <hr>
+           <p style="text-align: center; font-size: medium;">Want to book a workspace? Click to <a href="coworkerview.html#booksection" title="Click to Book Workspace">Book Workspace</a></p>
+        </form>
+
+      </article>
+    </main>
+
+    <!--Footer-->
+    <footer>
+      <p class="pfooter">© 2023 All Rights Reserved. SpaceShare.</p>
+    </footer>
+  </body>
+</html>
+
